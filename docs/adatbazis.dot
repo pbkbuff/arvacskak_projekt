@@ -1,0 +1,65 @@
+digraph adatbazis {
+    graph [rankdir=LR, fontname="Helvetica", nodesep=0.6, ranksep=1.0, bgcolor="white"];
+    node  [shape=plain, fontname="Helvetica", fontsize=11];
+    edge  [fontname="Helvetica", fontsize=9, color="#555555", arrowhead=crow, arrowtail=tee, dir=both];
+
+    felhasznalo [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#2e7d32" colspan="2"><font color="white"><b>felhasznalo</b></font></td></tr>
+        <tr><td align="left"><b>id</b></td><td port="id" align="left">INTEGER PK</td></tr>
+        <tr><td align="left">nev</td><td align="left">TEXT</td></tr>
+        <tr><td align="left">magassag_cm</td><td align="left">REAL</td></tr>
+        <tr><td align="left">szuletesi_datum</td><td align="left">TEXT (yyyy-MM-dd)</td></tr>
+        <tr><td align="left">nem</td><td align="left">FERFI | NO</td></tr>
+        <tr><td align="left">aktivitas</td><td align="left">ULO … NAGYON_AKTIV</td></tr>
+        <tr><td align="left">cel</td><td align="left">FOGYAS | TARTAS | HIZAS</td></tr>
+        <tr><td align="left">letrehozva</td><td align="left">TEXT</td></tr>
+      </table>>];
+
+    suly_meres [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#2e7d32" colspan="2"><font color="white"><b>suly_meres</b></font></td></tr>
+        <tr><td align="left"><b>id</b></td><td align="left">INTEGER PK</td></tr>
+        <tr><td port="fid" align="left">felhasznalo_id</td><td align="left">FK</td></tr>
+        <tr><td align="left">datum</td><td align="left">TEXT</td></tr>
+        <tr><td align="left">suly_kg</td><td align="left">REAL</td></tr>
+        <tr><td colspan="2" align="left"><i>UNIQUE(felhasznalo_id, datum)</i></td></tr>
+      </table>>];
+
+    naplo_bejegyzes [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#2e7d32" colspan="2"><font color="white"><b>naplo_bejegyzes</b></font></td></tr>
+        <tr><td align="left"><b>id</b></td><td align="left">INTEGER PK</td></tr>
+        <tr><td port="fid" align="left">felhasznalo_id</td><td align="left">FK</td></tr>
+        <tr><td align="left">datum</td><td align="left">TEXT</td></tr>
+        <tr><td port="tid" align="left">etkezes_tipus_id</td><td align="left">FK</td></tr>
+        <tr><td port="eid" align="left">etel_id</td><td align="left">FK</td></tr>
+        <tr><td align="left">mennyiseg_g</td><td align="left">REAL</td></tr>
+        <tr><td align="left">rogzitve</td><td align="left">TEXT</td></tr>
+      </table>>];
+
+    etel [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#1565c0" colspan="2"><font color="white"><b>etel</b></font></td></tr>
+        <tr><td align="left"><b>id</b></td><td port="id" align="left">INTEGER PK</td></tr>
+        <tr><td align="left">nev</td><td align="left">TEXT UNIQUE</td></tr>
+        <tr><td align="left">kcal_100g</td><td align="left">REAL</td></tr>
+        <tr><td align="left">feherje_100g</td><td align="left">REAL</td></tr>
+        <tr><td align="left">zsir_100g</td><td align="left">REAL</td></tr>
+        <tr><td align="left">szenhidrat_100g</td><td align="left">REAL</td></tr>
+      </table>>];
+
+    etkezes_tipus [label=<
+      <table border="0" cellborder="1" cellspacing="0" cellpadding="4">
+        <tr><td bgcolor="#1565c0" colspan="2"><font color="white"><b>etkezes_tipus</b></font></td></tr>
+        <tr><td align="left"><b>id</b></td><td port="id" align="left">INTEGER PK</td></tr>
+        <tr><td align="left">nev</td><td align="left">Reggeli, Ebéd, …</td></tr>
+        <tr><td align="left">kcal_arany</td><td align="left">REAL (0.25, 0.35, …)</td></tr>
+        <tr><td align="left">sorrend</td><td align="left">INTEGER</td></tr>
+      </table>>];
+
+    felhasznalo:id:e -> suly_meres:fid:w        [label="1 : N"];
+    felhasznalo:id:e -> naplo_bejegyzes:fid:w   [label="1 : N"];
+    etel:id:e -> naplo_bejegyzes:eid:w          [label="1 : N"];
+    etkezes_tipus:id:e -> naplo_bejegyzes:tid:w [label="1 : N"];
+}

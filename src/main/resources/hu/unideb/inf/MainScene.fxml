@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="480.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.MainController">
+   <left>
+      <VBox prefWidth="360.0" spacing="10.0">
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="Új felhasználó" />
+            <GridPane hgap="10.0" vgap="8.0">
+               <columnConstraints>
+                  <ColumnConstraints minWidth="110.0" />
+                  <ColumnConstraints hgrow="ALWAYS" />
+               </columnConstraints>
+               <children>
+                  <Label text="Név:" />
+                  <TextField fx:id="nameField" GridPane.columnIndex="1" />
+                  <Label text="Magasság (cm):" GridPane.rowIndex="1" />
+                  <TextField fx:id="heightField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Testsúly (kg):" GridPane.rowIndex="2" />
+                  <TextField fx:id="weightField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="Születési dátum:" GridPane.rowIndex="3" />
+                  <DatePicker fx:id="birthDatePicker" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="Nem:" GridPane.rowIndex="4" />
+                  <ComboBox fx:id="sexCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label text="Aktivitás:" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="activityCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label text="Cél:" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="goalCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+            </GridPane>
+            <Button defaultButton="true" mnemonicParsing="false" onAction="#handleSaveUser" text="Mentés" />
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox spacing="10.0">
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+         <children>
+            <Label styleClass="section-title" text="Felhasználók" />
+            <TableView fx:id="userTable" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="colName" prefWidth="140.0" text="Név" />
+                  <TableColumn fx:id="colAge" prefWidth="50.0" text="Kor" />
+                  <TableColumn fx:id="colHeight" prefWidth="90.0" text="Magasság" />
+                  <TableColumn fx:id="colWeight" prefWidth="70.0" text="Súly" />
+                  <TableColumn fx:id="colGoal" prefWidth="150.0" text="Cél" />
+               </columns>
+               <placeholder>
+                  <Label text="Még nincs felhasználó." />
+               </placeholder>
+            </TableView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
