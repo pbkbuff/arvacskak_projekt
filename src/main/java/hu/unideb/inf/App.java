@@ -7,39 +7,36 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static final String DB_FILE = "kaloria.db";
-
     private Database database;
 
     @Override
     public void start(Stage stage) throws Exception {
         database = new Database(DB_FILE);
 
+        // Regisztrációs ablakkal indít
         FXMLLoader loader = new FXMLLoader(App.class.getResource("MainScene.fxml"));
         Scene scene = new Scene(loader.load());
-        scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
+
+        if (App.class.getResource("style.css") != null) {
+            scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
+        }
 
         ((MainController) loader.getController()).setDatabase(database);
 
-        stage.setTitle("Kalóriaszámláló");
+        stage.setTitle("Kalóriaszámláló - Regisztráció / Bejelentkezés");
         stage.setScene(scene);
         stage.show();
     }
 
     @Override
     public void stop() throws Exception {
-        if (database != null) {
-            database.close();
-        }
+        if (database != null) database.close();
     }
 
     public static void main(String[] args) {
         launch();
     }
-
 }

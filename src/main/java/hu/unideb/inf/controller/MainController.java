@@ -1,21 +1,18 @@
 package hu.unideb.inf.controller;
 
+import hu.unideb.inf.App;
 import hu.unideb.inf.db.Database;
-import hu.unideb.inf.model.ActivityLevel;
-import hu.unideb.inf.model.Goal;
-import hu.unideb.inf.model.Sex;
-import hu.unideb.inf.model.User;
-import hu.unideb.inf.model.WeightEntry;
+import hu.unideb.inf.model.*;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
@@ -23,33 +20,14 @@ public class MainController {
 
     private Database database;
 
-    @FXML
-    private TextField nameField;
-    @FXML
-    private TextField heightField;
-    @FXML
-    private TextField weightField;
-    @FXML
-    private DatePicker birthDatePicker;
-    @FXML
-    private ComboBox<Sex> sexCombo;
-    @FXML
-    private ComboBox<ActivityLevel> activityCombo;
-    @FXML
-    private ComboBox<Goal> goalCombo;
+    @FXML private TextField nameField, heightField, weightField;
+    @FXML private DatePicker birthDatePicker;
+    @FXML private ComboBox<Sex> sexCombo;
+    @FXML private ComboBox<ActivityLevel> activityCombo;
+    @FXML private ComboBox<Goal> goalCombo;
 
-    @FXML
-    private TableView<User> userTable;
-    @FXML
-    private TableColumn<User, String> colName;
-    @FXML
-    private TableColumn<User, String> colAge;
-    @FXML
-    private TableColumn<User, String> colHeight;
-    @FXML
-    private TableColumn<User, String> colWeight;
-    @FXML
-    private TableColumn<User, String> colGoal;
+    @FXML private TableView<User> userTable;
+    @FXML private TableColumn<User, String> colName, colAge, colHeight, colWeight, colGoal;
 
     @FXML
     private void initialize() {
@@ -64,6 +42,34 @@ public class MainController {
         colHeight.setCellValueFactory(c -> new ReadOnlyStringWrapper(format(c.getValue().getHeightCm()) + " cm"));
         colWeight.setCellValueFactory(c -> new ReadOnlyStringWrapper(format(currentWeight(c.getValue())) + " kg"));
         colGoal.setCellValueFactory(c -> new ReadOnlyStringWrapper(c.getValue().getGoal().toString()));
+
+        // Ha kiválasztunk egy usert, megnyitja a Napválasztót
+        userTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) handleUserLogin(newSelection);
+        });
+    }
+
+    private void handleUserLogin(User selectedUser) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MainScene1.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Adatok a következő ablaknak
+            MainController1 nextController = fxmlLoader.getController();
+            nextController.setDatabase(this.database);
+            nextController.setCurrentUser(selectedUser);
+
+            Stage stage = new Stage();
+            stage.setTitle("Kalóriaszámláló - " + selectedUser.getName());
+            stage.setScene(new Scene(root));
+            stage.show();
+
+            // Jelenlegi regisztrációs ablak bezárása
+            ((Stage) userTable.getScene().getWindow()).close();
+        } catch (IOException e) {
+            showAlert(Alert.AlertType.ERROR, "Nem sikerült megnyitni a napválasztót!");
+            e.printStackTrace();
+        }
     }
 
     public void setDatabase(Database database) {
@@ -75,12 +81,12 @@ public class MainController {
     void handleSaveUser(ActionEvent event) {
         try {
             String name = nameField.getText().trim();
-            if (name.isEmpty()) {
-                throw new IllegalArgumentException("Add meg a nevet!");
-            }
+            if (name.isEmpty()) throw new IllegalArgumentException("Add meg a nevet!");
+
             double height = parsePositive(heightField, "Magasság");
             double weight = parsePositive(weightField, "Testsúly");
             LocalDate birthDate = birthDatePicker.getValue();
+
             if (birthDate == null || !birthDate.isBefore(LocalDate.now())) {
                 throw new IllegalArgumentException("Adj meg egy érvényes születési dátumot!");
             }
@@ -88,8 +94,7 @@ public class MainController {
                 throw new IllegalArgumentException("Válaszd ki a nemet, az aktivitást és a célt!");
             }
 
-            User user = new User(name, height, birthDate, sexCombo.getValue(),
-                    activityCombo.getValue(), goalCombo.getValue());
+            User user = new User(name, height, birthDate, sexCombo.getValue(), activityCombo.getValue(), goalCombo.getValue());
             database.getUserDao().create(user);
             database.getWeightDao().create(new WeightEntry(user, LocalDate.now(), weight));
 
@@ -128,23 +133,18 @@ public class MainController {
         goalCombo.setValue(Goal.TARTAS);
     }
 
-    // segedek
-
     private static String format(double value) {
         return value == Math.rint(value) ? String.format("%.0f", value) : String.format("%.1f", value);
     }
 
     private static double parsePositive(TextField field, String what) {
-        double value;
         try {
-            value = Double.parseDouble(field.getText().trim().replace(',', '.'));
+            double value = Double.parseDouble(field.getText().trim().replace(',', '.'));
+            if (value <= 0) throw new IllegalArgumentException(what + ": pozitív számot adj meg!");
+            return value;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(what + ": adj meg egy számot!");
         }
-        if (value <= 0) {
-            throw new IllegalArgumentException(what + ": pozitív számot adj meg!");
-        }
-        return value;
     }
 
     private void showAlert(Alert.AlertType type, String message) {
