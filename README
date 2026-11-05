@@ -1,0 +1,8 @@
+A program menete: Először megnyitja a MainScene.fxml-t aminek a segítségével felhasználót lehet regisztrálni.
+
+Sikeres regisztráció után pedig ha rákattintunk a felhasználóra megnyílik egy új ablak (MainScene1.fxml).
+Ezen az ablakon ki lehet választani a megadott napot (Hétfő, Kedd, stb) és étkezést (Reggeli, Ebéd, Vacsora).
+Kivalásztás után pedig megnyílik az étel naplózására alkalmas kezelőfelület, amin ételeket lehet hozzáadni kcal számmal és névvel.
+Innen vissza is lehet lépni a későbbi naplózás érdekében.
+
+(App.java --> MainScene.fxml | MainController.java (adatbázisba) --> MainScene1.fxml | MainController1.java --> LoggingScene.fxml | LoggingController.java (adatbázisba)

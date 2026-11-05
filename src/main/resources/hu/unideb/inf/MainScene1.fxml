@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<!-- A meglévő importok mellé -->
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com" xmlns:fx="http://javafx.com" fx:controller="hu.unideb.inf.controller.MainController1">
+    <children>
+        <Label fx:id="welcomeLabel" layoutX="50.0" layoutY="30.0" text="Üdvözöllek!">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+
+        <Label layoutX="185.0" layoutY="85.0" text="Beállítások kiválasztása">
+            <font>
+                <Font size="22.0" />
+            </font>
+        </Label>
+
+        <!-- 1. Napválasztó ComboBox -->
+        <Label layoutX="200.0" layoutY="135.0" text="Nap:" />
+        <ComboBox fx:id="dayComboBox" layoutX="200.0" layoutY="155.0" prefHeight="35.0" prefWidth="200.0" promptText="Válasszon napot...">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Hétfő" />
+                    <String fx:value="Kedd" />
+                    <String fx:value="Szerda" />
+                    <String fx:value="Csütörtök" />
+                    <String fx:value="Péntek" />
+                    <String fx:value="Szombat" />
+                    <String fx:value="Vasárnap" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- 2. Étkezésválasztó ComboBox -->
+        <Label layoutX="200.0" layoutY="205.0" text="Étkezés:" />
+        <ComboBox fx:id="mealComboBox" layoutX="200.0" layoutY="225.0" prefHeight="35.0" prefWidth="200.0" promptText="Válasszon étkezést...">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Reggeli" />
+                    <String fx:value="Ebéd" />
+                    <String fx:value="Vacsora" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <!-- Tovább gomb -->
+        <Button layoutX="200.0" layoutY="295.0" mnemonicParsing="false" onAction="#handleOpenLoggingScene" prefHeight="45.0" prefWidth="200.0" text="Tovább a naplózáshoz">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

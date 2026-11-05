@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="750.0" xmlns="http://javafx.com" xmlns:fx="http://javafx.com" fx:controller="hu.unideb.inf.controller.LoggingController">
+    <children>
+        <Label fx:id="infoLabel" layoutX="40.0" layoutY="25.0" text="Naplózás: Hétfő - Reggeli">
+            <font>
+                <Font name="System Bold" size="20.0" />
+            </font>
+        </Label>
+
+        <!-- Első sor: Étel neve és Kalória -->
+        <Label layoutX="40.0" layoutY="80.0" text="Étel neve:" />
+        <TextField fx:id="foodNameField" layoutX="110.0" layoutY="75.0" prefWidth="180.0" />
+
+        <Label layoutX="310.0" layoutY="80.0" text="Kalória (kcal):" />
+        <TextField fx:id="caloriesField" layoutX="395.0" layoutY="75.0" prefWidth="80.0" />
+
+        <!-- Második sor: Szénhidrát, Zsír, Fehérje és a Hozzáad gomb -->
+        <Label layoutX="40.0" layoutY="125.0" text="Szénhidrát (g):" />
+        <TextField fx:id="carbsField" layoutX="125.0" layoutY="120.0" prefWidth="60.0" />
+
+        <Label layoutX="205.0" layoutY="125.0" text="Zsír (g):" />
+        <TextField fx:id="fatField" layoutX="255.0" layoutY="120.0" prefWidth="60.0" />
+
+        <Label layoutX="335.0" layoutY="125.0" text="Fehérje (g):" />
+        <TextField fx:id="proteinField" layoutX="405.0" layoutY="120.0" prefWidth="60.0" />
+
+        <Button layoutX="490.0" layoutY="120.0" mnemonicParsing="false" onAction="#handleSaveLog" prefHeight="25.0" prefWidth="80.0" text="Hozzáad" />
+
+        <!-- Kibővített Táblázat -->
+        <TableView fx:id="mealTable" layoutX="40.0" layoutY="170.0" prefHeight="260.0" prefWidth="650.0">
+            <columns>
+                <TableColumn fx:id="colFoodName" prefWidth="250.0" text="Étel megnevezése" />
+                <TableColumn fx:id="colCalories" prefWidth="100.0" text="Kalória" />
+                <TableColumn fx:id="colCarbs" prefWidth="100.0" text="Szénhidrát" />
+                <TableColumn fx:id="colFat" prefWidth="100.0" text="Zsír" />
+                <TableColumn fx:id="colProtein" prefWidth="100.0" text="Fehérje" />
+            </columns>
+        </TableView>
+
+        <!-- Összegző rész -->
+        <Label fx:id="totalCaloriesLabel" layoutX="40.0" layoutY="450.0" text="Összesen: 0 kcal | CH: 0g | Zsír: 0g | Fehérje: 0g">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
+
+        <Button layoutX="40.0" layoutY="490.0" mnemonicParsing="false" onAction="#handleGoBack" prefHeight="35.0" prefWidth="100.0" text="← Vissza">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
