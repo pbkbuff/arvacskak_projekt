@@ -1,6 +1,7 @@
 package hu.unideb.inf;
 
 import hu.unideb.inf.controller.MainController;
+import hu.unideb.inf.controller.UserController;
 import hu.unideb.inf.db.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
