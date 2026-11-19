@@ -8,13 +8,13 @@ public class MealCategory {
     @DatabaseField(generatedId = true)
     private long id;
 
-    @DatabaseField(columnName = "nev", canBeNull = false)
+    @DatabaseField(columnName = "nev", canBeNull = false, unique = true)
     private String name;
 
-    @DatabaseField(columnName = "kcal_arany", canBeNull = false)
+    @DatabaseField(columnName = "kcal_arany", canBeNull = false, unique = true)
     private float kcal_arany;
 
-    @DatabaseField(columnName = "sorrend", canBeNull = false)
+    @DatabaseField(columnName = "sorrend", canBeNull = false, unique = true)
     private int sorrend;
 
     public MealCategory(){
