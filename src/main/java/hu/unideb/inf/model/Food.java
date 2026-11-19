@@ -8,19 +8,14 @@ public class Food {
 
     @DatabaseField(generatedId = true)
     private int id;
-
     @DatabaseField(columnName = "nev", canBeNull = false)
     private String name;
-
     @DatabaseField(columnName = "kcal_100g", canBeNull = false)
     private  int kcal;
-
     @DatabaseField(columnName = "feherje_100g", canBeNull = false)
     private  int protein;
-
     @DatabaseField(columnName = "zsir_100g", canBeNull = false)
     private  int fat;
-
     @DatabaseField(columnName = "szenhidrat_100g", canBeNull = false)
     private  int carbs;
 

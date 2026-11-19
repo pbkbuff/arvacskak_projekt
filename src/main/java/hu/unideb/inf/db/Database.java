@@ -5,6 +5,8 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import hu.unideb.inf.controller.FoodController;
+import hu.unideb.inf.model.Food;
 import hu.unideb.inf.model.User;
 import hu.unideb.inf.model.WeightEntry;
 
@@ -16,6 +18,7 @@ public class Database implements AutoCloseable {
     private final ConnectionSource connectionSource;
     private final Dao<User, Long> userDao;
     private final Dao<WeightEntry, Long> weightDao;
+    private final Dao<Food, Integer> foodDao;
 
     public Database(String fileName) throws SQLException {
         connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + fileName);
@@ -25,6 +28,7 @@ public class Database implements AutoCloseable {
 
         userDao = DaoManager.createDao(connectionSource, User.class);
         weightDao = DaoManager.createDao(connectionSource, WeightEntry.class);
+        foodDao = DaoManager.createDao(connectionSource, Food.class);
     }
 
     public Dao<User, Long> getUserDao() {
@@ -34,6 +38,8 @@ public class Database implements AutoCloseable {
     public Dao<WeightEntry, Long> getWeightDao() {
         return weightDao;
     }
+
+    public Dao<Food, Integer> getFoodDao() { return foodDao; }
 
     // legutolso meres, 0 ha nincs
     public double getCurrentWeight(User user) throws SQLException {
