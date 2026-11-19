@@ -26,6 +26,7 @@ public class App extends Application {
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
 
         ((MainController) loader.getController()).setDatabase(database);
+        ((MainController) loader.getController()).setDatabase(database);
 
         stage.setTitle("Kalóriaszámláló");
         stage.setScene(scene);

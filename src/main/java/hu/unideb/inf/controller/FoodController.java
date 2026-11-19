@@ -6,6 +6,7 @@ public class FoodController {
 
     private Database database;
 
-
-
+    public void setDatabase(Database database) {
+        this.database = database;
+    }
 }

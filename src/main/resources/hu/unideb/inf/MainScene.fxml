@@ -10,7 +10,7 @@
    <tabs>
       <Tab text="Felhasználók">
          <content>
-            <fx:include fx:id="usersTab" source="UserScene.fxml" />
+            <fx:include fx:id="user" source="UserScene.fxml" />
          </content>
       </Tab>
       <Tab text="Napló">
