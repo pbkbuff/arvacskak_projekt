@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class MainController {
+public class UserController {
 
     private Database database;
 
@@ -51,11 +51,11 @@ public class MainController {
 
     private void handleUserLogin(User selectedUser) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MainScene1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("DayChooser.fxml"));
             Parent root = fxmlLoader.load();
 
             // Adatok a következő ablaknak
-            MainController1 nextController = fxmlLoader.getController();
+            DayController nextController = fxmlLoader.getController();
             nextController.setDatabase(this.database);
             nextController.setCurrentUser(selectedUser);
 
@@ -81,7 +81,7 @@ public class MainController {
     void handleSaveUser(ActionEvent event) {
         try {
             String name = nameField.getText().trim();
-            if (name.isEmpty()) throw new IllegalArgumentException("Add meg a nevet!");
+            if (name.isEmpty()) throw new IllegalArgumentException("Add meg a neved!");
 
             double height = parsePositive(heightField, "Magasság");
             double weight = parsePositive(weightField, "Testsúly");

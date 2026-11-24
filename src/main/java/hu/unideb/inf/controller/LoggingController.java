@@ -24,7 +24,7 @@ public class LoggingController {
     private String currentMeal;
 
     @FXML private Label infoLabel, totalCaloriesLabel;
-    @FXML private TextField foodNameField, caloriesField, carbsField, fatField, proteinField; // ÚJ MEZŐK REGISZTRÁLVA
+    @FXML private TextField foodNameField, caloriesField, carbsField, fatField, proteinField;
 
     // Tábla cuccai új oszlopokkal
     @FXML private TableView<MealEntry> mealTable;
@@ -32,7 +32,7 @@ public class LoggingController {
 
     @FXML
     private void initialize() {
-        // Oszlopok összekötése a MealEntry-vel (az újak is)
+        // Oszlopok összekötése a MealEntry-vel
         colFoodName.setCellValueFactory(c -> new ReadOnlyStringWrapper(c.getValue().getFoodName()));
         colCalories.setCellValueFactory(c -> new ReadOnlyStringWrapper(String.format("%.0f kcal", c.getValue().getCalories())));
         colCarbs.setCellValueFactory(c -> new ReadOnlyStringWrapper(String.format("%.1f g", c.getValue().getCarbs())));
@@ -47,9 +47,8 @@ public class LoggingController {
         this.currentDay = day;
         this.currentMeal = meal;
         if (infoLabel != null) {
-            infoLabel.setText("Naplózás: " + day + " - " + meal);
+            infoLabel.setText(day + " - " + meal);
         }
-        // Miután minden adat (user, day, meal) megvan, ráfrissítünk
         refreshTable();
     }
 
@@ -58,7 +57,6 @@ public class LoggingController {
         if (database == null || currentUser == null || currentDay == null || currentMeal == null) return;
 
         try {
-            // ORMLite QueryBuilder a pontos szűrés miatt
             List<MealEntry> filteredMeals = database.getMealDao().queryBuilder().where()
                     .eq("felhasznalo_id", currentUser.getId()).and()
                     .eq("nap", currentDay).and()
@@ -73,7 +71,7 @@ public class LoggingController {
             double totalFat = filteredMeals.stream().mapToDouble(MealEntry::getFat).sum();
             double totalProtein = filteredMeals.stream().mapToDouble(MealEntry::getProtein).sum();
 
-            totalCaloriesLabel.setText(String.format("Összesen: %.0f kcal | CH: %.1fg | Zsír: %.1fg | Fehérje: %.1fg",
+            totalCaloriesLabel.setText(String.format("Összesen: %.0f kcal | Szénhidrát: %.0f | Zsír: %.0f | Fehérje: %.0f",
                     totalKcal, totalCarbs, totalFat, totalProtein));
 
         } catch (SQLException e) {
@@ -86,7 +84,7 @@ public class LoggingController {
     private void handleSaveLog(ActionEvent event) {
         try {
             String name = foodNameField.getText().trim();
-            if (name.isEmpty()) throw new IllegalArgumentException("Az étel nevét kötelező kitölteni!");
+            if (name.isEmpty()) throw new IllegalArgumentException("Add meg az étel nevét!");
 
             // Számok beolvasása és validálása a segédmetódussal
             double calories = parsePositive(caloriesField, "Kalória");
@@ -128,10 +126,10 @@ public class LoggingController {
     @FXML
     private void handleGoBack(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("MainScene1.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("DayChooser.fxml"));
             Parent root = fxmlLoader.load();
 
-            MainController1 selectionController = fxmlLoader.getController();
+            DayController selectionController = fxmlLoader.getController();
             selectionController.setDatabase(this.database);
             selectionController.setCurrentUser(this.currentUser);
             selectionController.setSelection(currentDay, currentMeal);

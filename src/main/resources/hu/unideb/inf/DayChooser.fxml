@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="349.0" prefWidth="479.0" styleClass="day-root" stylesheets="@DayStyle.css" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.DayController">
+
+    <StackPane layoutX="21.0" layoutY="24.0" prefHeight="432.0" prefWidth="598.0" AnchorPane.bottomAnchor="24.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="21.399999999999977" AnchorPane.topAnchor="24.0">
+        <VBox maxHeight="-Infinity" maxWidth="420.0" prefWidth="388.0" spacing="18.0" styleClass="card">
+            <padding>
+                <Insets bottom="28.0" left="28.0" right="28.0" top="28.0" />
+            </padding>
+            <Label fx:id="welcomeLabel" styleClass="card-title" text="Melyik napra és mit szeretnél beírni?" wrapText="true" />
+
+            <VBox spacing="6.0">
+                <Label styleClass="field-label" text="Nap" />
+                <ComboBox fx:id="dayComboBox" maxWidth="Infinity" promptText="Melyik nap?" styleClass="field-input">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Hétfő" />
+                            <String fx:value="Kedd" />
+                            <String fx:value="Szerda" />
+                            <String fx:value="Csütörtök" />
+                            <String fx:value="Péntek" />
+                            <String fx:value="Szombat" />
+                            <String fx:value="Vasárnap" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
+
+            <VBox spacing="6.0">
+                <Label styleClass="field-label" text="Étkezés" />
+                <ComboBox fx:id="mealComboBox" maxWidth="Infinity" promptText="Milyen étkezés?" styleClass="field-input">
+                    <items>
+                        <FXCollections fx:factory="observableArrayList">
+                            <String fx:value="Reggeli" />
+                            <String fx:value="Ebéd" />
+                            <String fx:value="Vacsora" />
+                        </FXCollections>
+                    </items>
+                </ComboBox>
+            </VBox>
+
+            <Button maxWidth="Infinity" onAction="#handleOpenLoggingScene" styleClass="primary-button" text="Tovább a naplózáshoz" />
+        </VBox>
+    </StackPane>
+</AnchorPane>

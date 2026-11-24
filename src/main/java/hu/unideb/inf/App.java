@@ -1,6 +1,6 @@
 package hu.unideb.inf;
 
-import hu.unideb.inf.controller.MainController;
+import hu.unideb.inf.controller.UserController;
 import hu.unideb.inf.db.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +17,14 @@ public class App extends Application {
         database = new Database(DB_FILE);
 
         // Regisztrációs ablakkal indít
-        FXMLLoader loader = new FXMLLoader(App.class.getResource("MainScene.fxml"));
+        FXMLLoader loader = new FXMLLoader(App.class.getResource("UserRegister.fxml"));
         Scene scene = new Scene(loader.load());
 
         if (App.class.getResource("style.css") != null) {
             scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
         }
 
-        ((MainController) loader.getController()).setDatabase(database);
+        ((UserController) loader.getController()).setDatabase(database);
 
         stage.setTitle("Kalóriaszámláló - Regisztráció / Bejelentkezés");
         stage.setScene(scene);

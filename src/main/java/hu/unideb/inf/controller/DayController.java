@@ -14,7 +14,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-public class MainController1 {
+public class DayController {
 
     private Database database;
     private User currentUser;
@@ -28,7 +28,7 @@ public class MainController1 {
     public void setCurrentUser(User user) {
         this.currentUser = user;
         if (welcomeLabel != null && user != null) {
-            welcomeLabel.setText("Felhasználó: " + user.getName());
+            welcomeLabel.setText("Szia " + user.getName() + "!");
         }
     }
 
@@ -44,7 +44,7 @@ public class MainController1 {
         String selectedMeal = mealComboBox.getValue();
 
         if (selectedDay == null || selectedMeal == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Kérlek válassz ki egy napot és egy étkezést is!");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Válassz ki napot és étkezést is!");
             alert.showAndWait();
             return;
         }
