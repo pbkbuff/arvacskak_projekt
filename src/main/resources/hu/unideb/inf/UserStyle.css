@@ -1,0 +1,83 @@
+/* ===== Alap / egész ablak ===== */
+.root {
+    -fx-background-color: #eef2f7;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* ===== Címek (.section-title) ===== */
+.section-title {
+    -fx-text-fill: #1f3a5f;
+    -fx-font-weight: bold;
+    -fx-padding: 0 0 6 0;
+}
+
+/* ===== Gombok ===== */
+.button {
+    -fx-background-color: #4a90d9;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+}
+.button:hover {
+    -fx-background-color: #357abd;
+}
+.button:pressed {
+    -fx-background-color: #2a5f94;
+}
+
+/* ===== Szövegmezők ===== */
+.text-field {
+    -fx-background-color: white;
+    -fx-background-radius: 4;
+    -fx-border-color: #c5d0dc;
+    -fx-border-radius: 4;
+    -fx-padding: 5 8 5 8;
+}
+.text-field:focused {
+    -fx-border-color: #4a90d9;
+}
+
+/* ===== DatePicker ===== */
+.date-picker {
+    -fx-background-radius: 4;
+    -fx-border-color: #c5d0dc;
+    -fx-border-radius: 4;
+}
+.date-picker:focused {
+    -fx-border-color: #4a90d9;
+}
+
+/* ===== ComboBox ===== */
+.combo-box {
+    -fx-background-radius: 4;
+    -fx-border-color: #c5d0dc;
+    -fx-border-radius: 4;
+}
+.combo-box:focused {
+    -fx-border-color: #4a90d9;
+}
+
+/* ===== Táblázat ===== */
+.table-view {
+    -fx-background-color: white;
+    -fx-border-color: #c5d0dc;
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+.table-view .column-header {
+    -fx-background-color: #dbe6f2;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #1f3a5f;
+    -fx-font-weight: bold;
+}
+.table-view .table-row-cell:odd {
+    -fx-background-color: #f7fafd;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: #4a90d9;
+    -fx-text-fill: white;
+}

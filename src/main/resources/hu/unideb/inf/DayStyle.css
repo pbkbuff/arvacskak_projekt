@@ -1,0 +1,79 @@
+.root,
+.day-root {
+    -fx-background-color: #4a3e3d;
+    -fx-font-family: "Segoe UI", "Inter", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+.card {
+    -fx-background-color: #5c4f4c;
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 12, 0, 0, 4);
+    -fx-border-color: #6e5f5b;
+    -fx-border-radius: 5;
+}
+.card-title {
+    -fx-text-fill: #f8f1e5;
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+}
+
+.field-label {
+    -fx-text-fill: #d6cbbd;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+.field-input {
+    -fx-background-color: #3e3332;
+    -fx-background-radius: 10;
+    -fx-border-color: #6e5f5b;
+    -fx-border-radius: 10;
+    -fx-padding: 4 6 4 6;
+    -fx-pref-height: 30;
+}
+.field-input:hover {
+    -fx-border-color: #8c7a75;
+}
+.field-input:focused {
+    -fx-border-color: #c0392b;
+}
+.field-input .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #f8f1e5;
+    -fx-padding: 6 10 6 10;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 12, 0, 0, 4);
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #3e3332;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-border-color: #6e5f5b;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 1), 12, 0, 0, 4);
+}
+.combo-box-popup .list-cell {
+    -fx-background-radius: 8;
+    -fx-padding: 7 12 7 12;
+    -fx-text-fill: #d6cbbd;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #5c4f4c;
+}
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: #ffffff;
+}
+
+.primary-button {
+    -fx-background-color: #c0392b;
+    -fx-text-fill: #f8f1e5;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 11 18 11 18;
+    -fx-cursor: hand;
+}
+.primary-button:hover {
+    -fx-background-color: #a93226;
+    -fx-effect: dropshadow(gaussian, rgba(192, 57, 43, 0.6), 14, 0, 0, 4);
+}

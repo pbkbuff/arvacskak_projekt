@@ -1,0 +1,234 @@
+/* ============================================================
+   DarkTheme.css — sötét, modern dashboard téma
+   ============================================================ */
+
+/* ---- Alap / egész ablak ---- */
+.root {
+    -fx-background-color: #121212;
+    -fx-font-family: "Segoe UI", "Inter", "Arial", sans-serif;
+    -fx-font-size: 13px;
+}
+
+/* ---- Kártyák (a nagy blokkok) ---- */
+.card {
+    -fx-background-color: #1e1e1e;
+    -fx-background-radius: 12;
+    -fx-border-color: #2c2c2c;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.45), 18, 0, 0, 6);
+}
+
+/* ---- Címek ---- */
+.card-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}
+.section-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ---- Mezőcímkék ---- */
+.field-label {
+    -fx-text-fill: #a0a0a0;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+/* ============================================================
+   Beviteli mezők (TextField, ComboBox, DatePicker)
+   ============================================================ */
+.text-field,
+.combo-box,
+.date-picker {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 8;
+    -fx-border-color: #3c3c3c;
+    -fx-border-radius: 8;
+    -fx-pref-height: 36;
+    -fx-padding: 0 10 0 10;
+}
+.text-field:focused,
+.combo-box:focused,
+.date-picker:focused {
+    -fx-border-color: #ff9800;
+    -fx-effect: dropshadow(gaussian, rgba(255, 152, 0, 0.25), 6, 0, 0, 0);
+}
+
+/* A belső szövegmező ne kapjon külön hátteret */
+.combo-box .text-field,
+.date-picker .text-field {
+    -fx-background-color: transparent;
+}
+
+/* ComboBox legördülő lista */
+.combo-box .list-cell {
+    -fx-text-fill: #ffffff;
+    -fx-background-color: transparent;
+    -fx-padding: 6 10 6 10;
+}
+.combo-box-popup .list-view {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #3c3c3c;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0, 0, 4);
+    -fx-padding: 4;
+}
+.combo-box-popup .list-cell:hover {
+    -fx-background-color: #2c2c2c;
+}
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: #121212;
+}
+
+/* DatePicker naptár (ha használod) */
+.date-picker-popup {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #3c3c3c;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+}
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: #2c2c2c;
+    -fx-background-radius: 8 8 0 0;
+}
+.date-picker-popup > .month-year-pane .label {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+}
+.date-picker-popup > * > .day-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #e0e0e0;
+    -fx-background-radius: 6;
+}
+.date-picker-popup > * > .day-cell:hover {
+    -fx-background-color: #2c2c2c;
+}
+.date-picker-popup > * > .day-cell.selected {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: #121212;
+}
+
+/* ============================================================
+   Gombok
+   ============================================================ */
+.button {
+    -fx-background-color: #2c2c2c;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-padding: 9 16 9 16;
+    -fx-cursor: hand;
+    -fx-border-color: #3c3c3c;
+    -fx-border-radius: 8;
+}
+.button:hover {
+    -fx-background-color: #3c3c3c;
+    -fx-border-color: #ff9800;
+}
+
+/* Kiemelt gomb (Mentés, Tovább, Hozzáad) */
+.primary-button {
+    -fx-background-color: #ff9800;
+    -fx-text-fill: #121212;
+    -fx-border-color: transparent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 152, 0, 0.30), 10, 0, 0, 3);
+}
+.primary-button:hover {
+    -fx-background-color: #e68a00;
+}
+.primary-button:pressed {
+    -fx-background-color: #cc7a00;
+    -fx-effect: dropshadow(gaussian, rgba(255, 152, 0, 0.15), 5, 0, 0, 1);
+}
+
+/* Vissza gomb (link-szerű) */
+.back-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #ff9800;
+    -fx-border-color: transparent;
+    -fx-font-size: 14px;
+    -fx-padding: 6 12 6 12;
+}
+.back-button:hover {
+    -fx-background-color: rgba(255, 152, 0, 0.12);
+    -fx-border-color: transparent;
+}
+
+/* ============================================================
+   Táblázat
+   ============================================================ */
+.table-view {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: #3c3c3c;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.table-view .column-header-background {
+    -fx-background-color: #2c2c2c;
+    -fx-background-radius: 8 8 0 0;
+}
+.table-view .column-header,
+.table-view .filler {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent #3c3c3c transparent transparent;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #a0a0a0;
+    -fx-font-weight: bold;
+    -fx-alignment: center-left;
+}
+.table-view .table-row-cell {
+    -fx-background-color: #1e1e1e;
+    -fx-border-color: transparent transparent #2c2c2c transparent;
+}
+.table-view .table-row-cell:hover {
+    -fx-background-color: #242424;
+}
+.table-view .table-row-cell:selected {
+    -fx-background-color: rgba(255, 152, 0, 0.18);
+}
+.table-view .table-cell {
+    -fx-text-fill: #e0e0e0;
+    -fx-alignment: center-left;
+    -fx-padding: 8;
+}
+.table-view .table-row-cell:selected .table-cell {
+    -fx-text-fill: #ff9800;
+    -fx-font-weight: bold;
+}
+.table-view .placeholder .label {
+    -fx-text-fill: #a0a0a0;
+}
+
+/* Görgetősáv */
+.scroll-bar {
+    -fx-background-color: transparent;
+}
+.scroll-bar .thumb {
+    -fx-background-color: #3c3c3c;
+    -fx-background-radius: 4;
+}
+.scroll-bar .thumb:hover {
+    -fx-background-color: #4c4c4c;
+}
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+
+/* ============================================================
+   Belső "mini-kártyák" (opcionális, ha használod a .field-block-ot)
+   ============================================================ */
+.field-block {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+}
