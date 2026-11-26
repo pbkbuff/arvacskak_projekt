@@ -1,7 +1,6 @@
 package hu.unideb.inf;
 
 import hu.unideb.inf.controller.MainController;
-import hu.unideb.inf.controller.UserController;
 import hu.unideb.inf.db.Database;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,6 @@ public class App extends Application {
         Scene scene = new Scene(loader.load());
         scene.getStylesheets().add(App.class.getResource("style.css").toExternalForm());
 
-        ((MainController) loader.getController()).setDatabase(database);
         ((MainController) loader.getController()).setDatabase(database);
 
         stage.setTitle("Kalóriaszámláló");

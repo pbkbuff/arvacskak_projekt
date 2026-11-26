@@ -8,22 +8,21 @@ public class Food {
 
     @DatabaseField(generatedId = true)
     private int id;
-    @DatabaseField(columnName = "nev", canBeNull = false)
+    @DatabaseField(columnName = "nev", canBeNull = false, unique = true)
     private String name;
     @DatabaseField(columnName = "kcal_100g", canBeNull = false)
-    private  int kcal;
+    private double kcal;
     @DatabaseField(columnName = "feherje_100g", canBeNull = false)
-    private  int protein;
+    private double protein;
     @DatabaseField(columnName = "zsir_100g", canBeNull = false)
-    private  int fat;
+    private double fat;
     @DatabaseField(columnName = "szenhidrat_100g", canBeNull = false)
-    private  int carbs;
+    private double carbs;
 
     public Food() {
     }
 
-    public Food(int id, String name, int kcal, int protein, int fat, int carbs) {
-        this.id = id;
+    public Food(String name, double kcal, double protein, double fat, double carbs) {
         this.name = name;
         this.kcal = kcal;
         this.protein = protein;
@@ -47,35 +46,35 @@ public class Food {
         this.name = name;
     }
 
-    public int getKcal() {
+    public double getKcal() {
         return kcal;
     }
 
-    public void setKcal(int kcal) {
+    public void setKcal(double kcal) {
         this.kcal = kcal;
     }
 
-    public int getProtein() {
+    public double getProtein() {
         return protein;
     }
 
-    public void setProtein(int protein) {
+    public void setProtein(double protein) {
         this.protein = protein;
     }
 
-    public int getFat() {
+    public double getFat() {
         return fat;
     }
 
-    public void setFat(int fat) {
+    public void setFat(double fat) {
         this.fat = fat;
     }
 
-    public int getCarbs() {
+    public double getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(int carbs) {
+    public void setCarbs(double carbs) {
         this.carbs = carbs;
     }
 }
