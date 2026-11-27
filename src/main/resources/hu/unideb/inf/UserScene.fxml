@@ -57,6 +57,13 @@
                         <Label text="Még nincs felhasználó." />
                     </placeholder>
                 </TableView>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <children>
+                        <Label text="Új súly (kg):" />
+                        <TextField fx:id="newWeightField" onAction="#handleUpdateWeight" prefWidth="90.0" />
+                        <Button mnemonicParsing="false" onAction="#handleUpdateWeight" text="Súly frissítése" />
+                    </children>
+                </HBox>
             </children>
         </VBox>
     </center>

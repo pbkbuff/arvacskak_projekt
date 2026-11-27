@@ -11,6 +11,7 @@ import hu.unideb.inf.model.User;
 import hu.unideb.inf.model.WeightEntry;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 // sqlite + ormlite, tablakat ha nincsenek letrehozza
@@ -91,6 +92,20 @@ public class Database implements AutoCloseable {
                 .where().eq("felhasznalo_id", user.getId())
                 .queryForFirst();
         return last == null ? 0 : last.getWeightKg();
+    }
+
+    // naponta egy meres, false ha ma mar van
+    public boolean addTodayWeight(User user, double weightKg) throws SQLException {
+        LocalDate today = LocalDate.now();
+        long count = weightDao.queryBuilder()
+                .where().eq("felhasznalo_id", user.getId())
+                .and().eq("datum", today.toString())
+                .countOf();
+        if (count > 0) {
+            return false;
+        }
+        weightDao.create(new WeightEntry(user, today, weightKg));
+        return true;
     }
 
     @Override

@@ -37,6 +37,8 @@ public class UserController {
     private ComboBox<ActivityLevel> activityCombo;
     @FXML
     private ComboBox<Goal> goalCombo;
+    @FXML
+    private TextField newWeightField;
 
     @FXML
     private TableView<User> userTable;
@@ -102,6 +104,27 @@ public class UserController {
         }
     }
 
+    @FXML
+    void handleUpdateWeight(ActionEvent event) {
+        try {
+            User user = userTable.getSelectionModel().getSelectedItem();
+            if (user == null) {
+                throw new IllegalArgumentException("Válassz ki egy felhasználót!");
+            }
+            double weight = parsePositive(newWeightField, "Testsúly");
+            if (!database.addTodayWeight(user, weight)) {
+                throw new IllegalArgumentException("Ma már rögzítettél súlyt!");
+            }
+
+            newWeightField.clear();
+            userTable.refresh();
+        } catch (IllegalArgumentException e) {
+            showAlert(Alert.AlertType.WARNING, e.getMessage());
+        } catch (SQLException e) {
+            showAlert(Alert.AlertType.ERROR, "Mentés sikertelen: " + e.getMessage());
+        }
+    }
+
     private void reloadUsers() {
         try {
             userTable.getItems().setAll(database.getUserDao().queryForAll());
@@ -141,7 +164,7 @@ public class UserController {
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(what + ": adj meg egy számot!");
         }
-        if (value <= 0) {
+        if (!Double.isFinite(value) || value <= 0) {
             throw new IllegalArgumentException(what + ": pozitív számot adj meg!");
         }
         return value;
