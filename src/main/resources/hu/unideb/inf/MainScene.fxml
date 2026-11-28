@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
-
 <TabPane prefHeight="520.0" prefWidth="900.0" tabClosingPolicy="UNAVAILABLE"
          xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
          fx:controller="hu.unideb.inf.controller.MainController">
@@ -13,9 +11,9 @@
             <fx:include fx:id="user" source="UserScene.fxml" />
          </content>
       </Tab>
-      <Tab text="Napló">
+      <Tab fx:id="logTab" text="Napló">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <fx:include fx:id="log" source="LogScene.fxml" />
          </content>
       </Tab>
    </tabs>

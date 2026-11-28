@@ -77,4 +77,9 @@ public class Food {
     public void setCarbs(double carbs) {
         this.carbs = carbs;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

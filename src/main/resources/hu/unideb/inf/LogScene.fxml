@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="480.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.controller.LogController">
+    <left>
+        <VBox prefWidth="360.0" spacing="10.0">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+            <children>
+                <Label styleClass="section-title" text="Új bejegyzés" />
+                <GridPane hgap="10.0" vgap="8.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="110.0" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+                    <children>
+                        <Label text="Felhasználó:" />
+                        <ComboBox fx:id="userCombo" maxWidth="Infinity" GridPane.columnIndex="1" />
+                        <Label text="Dátum:" GridPane.rowIndex="1" />
+                        <DatePicker fx:id="datePicker" editable="false" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label text="Étkezés:" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="mealCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Étel:" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="foodCombo" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Mennyiség (g):" GridPane.rowIndex="4" />
+                        <TextField fx:id="amountField" onAction="#handleAddEntry" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                    </children>
+                </GridPane>
+                <Button mnemonicParsing="false" onAction="#handleAddEntry" text="Hozzáadás" />
+            </children>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+            </padding>
+            <children>
+                <Label styleClass="section-title" text="Napi bejegyzések" />
+                <TableView fx:id="entryTable" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colMeal" prefWidth="100.0" sortable="false" text="Étkezés" />
+                        <TableColumn fx:id="colFood" prefWidth="180.0" sortable="false" text="Étel" />
+                        <TableColumn fx:id="colAmount" prefWidth="100.0" sortable="false" text="Mennyiség" />
+                        <TableColumn fx:id="colKcal" prefWidth="100.0" sortable="false" text="Kalória" />
+                    </columns>
+                    <placeholder>
+                        <Label text="Nincs bejegyzés ezen a napon." />
+                    </placeholder>
+                </TableView>
+            </children>
+        </VBox>
+    </center>
+</BorderPane>

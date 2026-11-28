@@ -53,4 +53,9 @@ public class MealCategory {
     public void setSorrend(int sorrend){
         this.sorrend = sorrend;
     }
+
+    @Override
+    public String toString(){
+        return name;
+    }
 }

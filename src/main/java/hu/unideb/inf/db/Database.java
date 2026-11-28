@@ -5,6 +5,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import hu.unideb.inf.model.DiaryEntry;
 import hu.unideb.inf.model.Food;
 import hu.unideb.inf.model.MealCategory;
 import hu.unideb.inf.model.User;
@@ -12,6 +13,7 @@ import hu.unideb.inf.model.WeightEntry;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 // sqlite + ormlite, tablakat ha nincsenek letrehozza
@@ -22,6 +24,7 @@ public class Database implements AutoCloseable {
     private final Dao<WeightEntry, Long> weightDao;
     private final Dao<Food, Integer> foodDao;
     private final Dao<MealCategory, Long> mealCategoryDao;
+    private final Dao<DiaryEntry, Long> diaryDao;
 
     public Database(String fileName) throws SQLException {
         connectionSource = new JdbcConnectionSource("jdbc:sqlite:" + fileName);
@@ -30,11 +33,13 @@ public class Database implements AutoCloseable {
         TableUtils.createTableIfNotExists(connectionSource, WeightEntry.class);
         TableUtils.createTableIfNotExists(connectionSource, Food.class);
         TableUtils.createTableIfNotExists(connectionSource, MealCategory.class);
+        TableUtils.createTableIfNotExists(connectionSource, DiaryEntry.class);
 
         userDao = DaoManager.createDao(connectionSource, User.class);
         weightDao = DaoManager.createDao(connectionSource, WeightEntry.class);
         foodDao = DaoManager.createDao(connectionSource, Food.class);
         mealCategoryDao = DaoManager.createDao(connectionSource, MealCategory.class);
+        diaryDao = DaoManager.createDao(connectionSource, DiaryEntry.class);
 
         seedMealCategories();
         seedFoods();
@@ -52,6 +57,21 @@ public class Database implements AutoCloseable {
 
     public Dao<MealCategory, Long> getMealCategoryDao() {
         return mealCategoryDao;
+    }
+
+    public Dao<DiaryEntry, Long> getDiaryDao() {
+        return diaryDao;
+    }
+
+    // egy nap bejegyzesei, etkezes sorrendben
+    public List<DiaryEntry> getDiaryEntries(User user, LocalDate date) throws SQLException {
+        List<DiaryEntry> entries = diaryDao.queryBuilder()
+                .orderBy("id", true)
+                .where().eq("felhasznalo_id", user.getId())
+                .and().eq("datum", date.toString())
+                .query();
+        entries.sort(Comparator.comparingInt(e -> e.getMealCategory().getSorrend()));
+        return entries;
     }
 
     // alap etkezesek, csak ha ures a tabla. az aranyok osszege 1.0

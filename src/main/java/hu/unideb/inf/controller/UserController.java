@@ -153,11 +153,11 @@ public class UserController {
 
     // segedek
 
-    private static String format(double value) {
+    static String format(double value) {
         return value == Math.rint(value) ? String.format("%.0f", value) : String.format("%.1f", value);
     }
 
-    private static double parsePositive(TextField field, String what) {
+    static double parsePositive(TextField field, String what) {
         double value;
         try {
             value = Double.parseDouble(field.getText().trim().replace(',', '.'));
@@ -170,7 +170,7 @@ public class UserController {
         return value;
     }
 
-    private void showAlert(Alert.AlertType type, String message) {
+    static void showAlert(Alert.AlertType type, String message) {
         Alert alert = new Alert(type, message);
         alert.setHeaderText(null);
         alert.showAndWait();
